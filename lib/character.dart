@@ -1,3 +1,4 @@
+import 'package:dinosaur_card/detail.dart';
 import 'package:flutter/material.dart';
 
 class Character extends StatelessWidget {
@@ -23,7 +24,20 @@ class Character extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      Image.asset("images/di1.png", height: 152),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => DetailPage(),
+                            ),
+                          );
+                        },
+                        child: Image.network(
+                          "https://github.com/icodingchef/animal_book/blob/master/images/bear.png",
+                          width: 152,
+                          height: 152,
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20, bottom: 10),
                         child: Container(
