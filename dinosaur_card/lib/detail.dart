@@ -1,4 +1,4 @@
-import 'package:dinosaur_card/info.dart';
+import 'info.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
