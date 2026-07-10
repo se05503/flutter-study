@@ -1,91 +1,60 @@
+import 'package:dinosaur_card/info.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
+  const DetailPage({
+    super.key,
+    required this.name,
+    required this.period,
+    required this.taste,
+    required this.length,
+    required this.weight,
+    required this.description,
+    required this.imagePath,
+    required this.color,
+  });
+
+  final String name;
+  final String period;
+  final String taste;
+  final String length;
+  final String weight;
+  final String description;
+  final String imagePath;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail page"),
-        backgroundColor: Colors.green,
+        title: Text(name),
+        backgroundColor: color,
         centerTitle: true,
       ),
       body: Column(
         children: [
           Container(
-            color: Colors.green,
+            color: color,
             width: double.infinity,
             height: 200,
-            child: Center(child: Image.asset("images/di1.png", width: 120)),
+            child: Center(child: Image.asset(imagePath, width: 120)),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      "시대",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: 40),
-                    Text("백악기 후기 (6800만년 전)"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "식성",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: 40),
-                    Text("육식"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "길이",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: 40),
-                    Text("12-15m"),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "체중",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(width: 40),
-                    Text("7톤"),
-                  ],
-                ),
+                Info(title: "시대", content: period),
+                Info(title: "식성", content: taste),
+                Info(title: "길이", content: length),
+                Info(title: "무게", content: weight),
                 SizedBox(height: 20),
                 Text(
                   "설명",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 4),
-                Text(
-                  "T-Rex는 가장 잘 알려진 공룡 중 하나로, "
-                  "강력한 턱과 날카로운 이빨을 가진 포식자였습니다...",
-                ),
+                Text(description),
               ],
             ),
           ),
