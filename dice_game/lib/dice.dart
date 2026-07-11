@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class Dice extends StatefulWidget {
   const Dice({super.key});
@@ -12,11 +13,19 @@ class Dice extends StatefulWidget {
 class _DiceState extends State<Dice> {
   int diceNumber = 1;
   int diceNumber2 = 1;
+  bool isRolling = false;
 
   void rollingDice() {
+    if (isRolling) return;
     setState(() {
-      diceNumber = Random().nextInt(6) + 1;
-      diceNumber2 = Random().nextInt(6) + 1;
+      isRolling = true;
+    });
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        diceNumber = Random().nextInt(6) + 1;
+        diceNumber2 = Random().nextInt(6) + 1;
+        isRolling = false;
+      });
     });
   }
 
@@ -33,17 +42,25 @@ class _DiceState extends State<Dice> {
           onTap: rollingDice,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Image.asset("images/dice$diceNumber.png", width: 200),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: Image.asset("images/dice$diceNumber2.png", width: 200),
-                ),
-              ],
-            ),
+            child: isRolling
+                ? Lottie.asset("lottie/rolling_dice.json", width: 300)
+                : Row(
+                    children: [
+                      Expanded(
+                        child: Image.asset(
+                          "images/dice$diceNumber.png",
+                          width: 200,
+                        ),
+                      ),
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: Image.asset(
+                          "images/dice$diceNumber2.png",
+                          width: 200,
+                        ),
+                      ),
+                    ],
+                  ),
           ),
         ),
       ),
