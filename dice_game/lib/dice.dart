@@ -66,6 +66,11 @@ class _DiceState extends State<Dice> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: rollingDice,
+        backgroundColor: Colors.red[400],
+        child: Icon(Icons.casino, color: Colors.white),
+      ),
     );
   }
 }
