@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -14,12 +14,14 @@ class _DiceState extends State<Dice> {
   int diceNumber = 1;
   int diceNumber2 = 1;
   bool isRolling = false;
+  final AudioPlayer player = AudioPlayer();
 
   void rollingDice() {
     if (isRolling) return;
     setState(() {
       isRolling = true;
     });
+    player.play(AssetSource('dice_sound.wav'));
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
         diceNumber = Random().nextInt(6) + 1;
