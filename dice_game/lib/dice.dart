@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
 class Dice extends StatefulWidget {
@@ -28,7 +29,16 @@ class _DiceState extends State<Dice> {
         diceNumber2 = Random().nextInt(6) + 1;
         isRolling = false;
       });
+      showToast("첫 번째 주사위는 $diceNumber, 두 번째 주사위는 $diceNumber2 입니다.");
     });
+  }
+
+  void showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+    );
   }
 
   @override
