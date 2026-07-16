@@ -29,8 +29,24 @@ class TaskTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Checkbox(value: isCompleted, onChanged: onChanged),
-            Text(taskName, style: TextStyle(color: Colors.white, fontSize: 16)),
+            Checkbox(
+              value: isCompleted,
+              onChanged: onChanged,
+              activeColor: Colors.deepPurple,
+              side: BorderSide(color: Colors.white, width: 1),
+            ),
+            Text(
+              taskName,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                decoration: isCompleted
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none,
+                decorationThickness: 3.0,
+                decorationColor: Colors.white,
+              ),
+            ),
           ],
         ),
       ),

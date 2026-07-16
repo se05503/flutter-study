@@ -42,6 +42,10 @@ class _TodoListState extends State<TodoList> {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
