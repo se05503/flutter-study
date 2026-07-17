@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:todo/widget/mybutton.dart';
 
 class TaskBox extends StatelessWidget {
@@ -41,6 +42,8 @@ class TaskBox extends StatelessWidget {
                 Mybutton(onPressed: onCancel, buttonName: "취소하기"),
               ],
             ),
+            SizedBox(height: 40),
+            Lottie.asset("lib/lottie/calendar.json", width: 300),
           ],
         ),
       ),
