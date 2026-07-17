@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:todo/pages/task_tile.dart';
+import 'package:todo/widget/task_box.dart';
 
 class TodoList extends StatefulWidget {
   const TodoList({super.key});
@@ -10,17 +11,34 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  List todoTask = [
-    ["피아노치기", false],
-    ["영화보기", false],
-    ["공부하기", false],
-    ["독서하기", false],
-  ];
+  final _controller = TextEditingController();
+
+  List todoTask = [];
 
   void checkBoxTapped(int index) {
     setState(() {
       todoTask[index][1] = !todoTask[index][1];
     });
+  }
+
+  void addNewTask() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return TaskBox(
+          controller: _controller,
+          onSave: saveTask,
+          onCancel: () => Navigator.pop(context),
+        );
+      },
+    );
+  }
+
+  void saveTask() {
+    setState(() {
+      todoTask.add([_controller.text, false]);
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -43,7 +61,7 @@ class _TodoListState extends State<TodoList> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: addNewTask,
         child: Icon(Icons.add),
       ),
     );
