@@ -39,7 +39,11 @@ class _TodoListState extends State<TodoList> {
 
   void saveTask() {
     setState(() {
-      db.todoTask.add([_controller.text, false]);
+      db.todoTask.add([
+        _controller.text,
+        false,
+        DateTime.now().millisecondsSinceEpoch.toString(),
+      ]);
     });
     _controller.clear();
     db.updateData();
@@ -76,9 +80,9 @@ class _TodoListState extends State<TodoList> {
         itemCount: db.todoTask.length,
         itemBuilder: (context, index) {
           return TaskTile(
-            key: Key(index.toString()),
             taskName: db.todoTask[index][0],
             isCompleted: db.todoTask[index][1],
+            createdAt: db.todoTask[index][2],
             onChanged: (isChecked) => checkBoxTapped(index),
             onDelete: (context) => deleteTask(index),
           );

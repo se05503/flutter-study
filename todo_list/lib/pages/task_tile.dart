@@ -6,12 +6,14 @@ class TaskTile extends StatelessWidget {
     super.key,
     required this.taskName,
     required this.isCompleted,
+    required this.createdAt,
     required this.onChanged,
     required this.onDelete,
   });
 
   final String taskName;
   final bool isCompleted;
+  final String createdAt;
   final void Function(bool?)? onChanged;
   final void Function(BuildContext)? onDelete;
 
@@ -25,7 +27,7 @@ class TaskTile extends StatelessWidget {
         bottom: 0,
       ),
       child: Slidable(
-        key: key,
+        key: Key(createdAt),
         endActionPane: ActionPane(
           motion: StretchMotion(),
           dismissible: DismissiblePane(onDismissed: () => onDelete!(context)),

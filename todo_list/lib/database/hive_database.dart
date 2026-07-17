@@ -7,7 +7,7 @@ class HiveDatabase {
 
   void initData() {
     todoTask = [
-      ["첫 할일을 작성해보세요", false],
+      ["첫 할일을 작성해보세요", false, DateTime.now().millisecondsSinceEpoch.toString()],
     ];
   }
 
