@@ -38,6 +38,7 @@ class _TodoListState extends State<TodoList> {
     setState(() {
       todoTask.add([_controller.text, false]);
     });
+    _controller.clear();
     Navigator.pop(context);
   }
 
