@@ -42,6 +42,12 @@ class _TodoListState extends State<TodoList> {
     Navigator.pop(context);
   }
 
+  void deleteTask(int index) {
+    setState(() {
+      todoTask.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +64,7 @@ class _TodoListState extends State<TodoList> {
             taskName: todoTask[index][0],
             isCompleted: todoTask[index][1],
             onChanged: (isChecked) => checkBoxTapped(index),
+            onDelete: (context) => deleteTask(index),
           );
         },
       ),
