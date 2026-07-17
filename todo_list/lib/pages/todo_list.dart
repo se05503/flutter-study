@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:todo/constants.dart';
+import 'package:todo/database/hive_database.dart';
 import 'package:todo/pages/task_tile.dart';
 import 'package:todo/widget/task_box.dart';
 
@@ -11,14 +13,15 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
+  HiveDatabase db = HiveDatabase();
+  final _dataBox = Hive.box(AppConstants.dbName);
   final _controller = TextEditingController();
-
-  List todoTask = [];
 
   void checkBoxTapped(int index) {
     setState(() {
-      todoTask[index][1] = !todoTask[index][1];
+      db.todoTask[index][1] = !db.todoTask[index][1];
     });
+    db.updateData();
   }
 
   void addNewTask() {
@@ -36,16 +39,28 @@ class _TodoListState extends State<TodoList> {
 
   void saveTask() {
     setState(() {
-      todoTask.add([_controller.text, false]);
+      db.todoTask.add([_controller.text, false]);
     });
     _controller.clear();
+    db.updateData();
     Navigator.pop(context);
   }
 
   void deleteTask(int index) {
     setState(() {
-      todoTask.removeAt(index);
+      db.todoTask.removeAt(index);
     });
+    db.updateData();
+  }
+
+  @override
+  void initState() {
+    if (_dataBox.get(AppConstants.dbTodoKey) == null) {
+      db.initData();
+    } else {
+      db.readData();
+    }
+    super.initState();
   }
 
   @override
@@ -58,11 +73,12 @@ class _TodoListState extends State<TodoList> {
         foregroundColor: Colors.white,
       ),
       body: ListView.builder(
-        itemCount: todoTask.length,
+        itemCount: db.todoTask.length,
         itemBuilder: (context, index) {
           return TaskTile(
-            taskName: todoTask[index][0],
-            isCompleted: todoTask[index][1],
+            key: Key(index.toString()),
+            taskName: db.todoTask[index][0],
+            isCompleted: db.todoTask[index][1],
             onChanged: (isChecked) => checkBoxTapped(index),
             onDelete: (context) => deleteTask(index),
           );
