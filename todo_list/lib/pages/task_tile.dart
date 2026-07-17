@@ -27,6 +27,7 @@ class TaskTile extends StatelessWidget {
       child: Slidable(
         endActionPane: ActionPane(
           motion: StretchMotion(),
+          dismissible: DismissiblePane(onDismissed: () => onDelete!(context)),
           children: [
             SlidableAction(
               onPressed: onDelete,
