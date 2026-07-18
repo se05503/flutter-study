@@ -24,30 +24,24 @@ class _TodoListState extends State<TodoList> {
     db.updateData();
   }
 
-  void addNewTask() {
-    showDialog(
+  void addNewTask() async {
+    final taskTime = await showDialog<DateTime?>(
       context: context,
       builder: (context) {
         return TaskBox(
           controller: _controller,
-          onSave: saveTask,
           onCancel: () => Navigator.pop(context),
         );
       },
     );
-  }
 
-  void saveTask() {
+    print("dialog exit and received data: $taskTime");
+
     setState(() {
-      db.todoTask.add([
-        _controller.text,
-        false,
-        DateTime.now().millisecondsSinceEpoch.toString(),
-      ]);
+      db.todoTask.add([_controller.text, false, taskTime]);
     });
     _controller.clear();
     db.updateData();
-    Navigator.pop(context);
   }
 
   void deleteTask(int index) {
@@ -82,7 +76,7 @@ class _TodoListState extends State<TodoList> {
           return TaskTile(
             taskName: db.todoTask[index][0],
             isCompleted: db.todoTask[index][1],
-            createdAt: db.todoTask[index][2],
+            taskTime: db.todoTask[index][2],
             onChanged: (isChecked) => checkBoxTapped(index),
             onDelete: (context) => deleteTask(index),
           );

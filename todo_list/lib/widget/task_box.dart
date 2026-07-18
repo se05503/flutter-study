@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:todo/database/hive_database.dart';
 import 'package:todo/widget/mybutton.dart';
 
 class TaskBox extends StatefulWidget {
-  const TaskBox({
-    super.key,
-    required this.controller,
-    required this.onSave,
-    required this.onCancel,
-  });
+  const TaskBox({super.key, required this.controller, required this.onCancel});
 
   final TextEditingController controller;
-  final VoidCallback onSave;
   final VoidCallback onCancel;
 
   @override
@@ -60,6 +55,18 @@ class _TaskBoxState extends State<TaskBox> {
     }
   }
 
+  void showSnackBar(String content) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          content,
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        backgroundColor: Colors.black,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -85,20 +92,19 @@ class _TaskBoxState extends State<TaskBox> {
               children: [
                 Mybutton(
                   onPressed: () {
+                    HiveDatabase db = HiveDatabase();
+                    db.readData();
                     if (widget.controller.text.trim().isEmpty) {
                       // 사용자가 공백만 입력하거나, 아무것도 입력하지 않은 경우
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            "내용을 입력해주세요!",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          backgroundColor: Colors.black,
-                        ),
-                      );
+                      showSnackBar("내용을 입력해주세요!");
+                      return;
+                    } else if (db.todoTask.any(
+                      (task) => task[0] == widget.controller.text.trim(),
+                    )) {
+                      showSnackBar("동일한 할일이 이미 등록되어 있습니다!");
                       return;
                     }
-                    widget.onSave;
+                    Navigator.pop(context, _selectedDateTime);
                   },
                   buttonName: "저장하기",
                 ),
