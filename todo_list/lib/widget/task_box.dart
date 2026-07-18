@@ -83,7 +83,25 @@ class _TaskBoxState extends State<TaskBox> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Mybutton(onPressed: widget.onSave, buttonName: "저장하기"),
+                Mybutton(
+                  onPressed: () {
+                    if (widget.controller.text.trim().isEmpty) {
+                      // 사용자가 공백만 입력하거나, 아무것도 입력하지 않은 경우
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "내용을 입력해주세요!",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          backgroundColor: Colors.black,
+                        ),
+                      );
+                      return;
+                    }
+                    widget.onSave;
+                  },
+                  buttonName: "저장하기",
+                ),
                 SizedBox(width: 20),
                 Mybutton(onPressed: widget.onCancel, buttonName: "취소하기"),
               ],
