@@ -104,7 +104,10 @@ class _TaskBoxState extends State<TaskBox> {
                       showSnackBar("동일한 할일이 이미 등록되어 있습니다!");
                       return;
                     }
-                    Navigator.pop(context, _selectedDateTime);
+                    Navigator.pop(context, (
+                      widget.controller.text,
+                      _selectedDateTime,
+                    ));
                   },
                   buttonName: "저장하기",
                 ),

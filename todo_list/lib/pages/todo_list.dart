@@ -25,7 +25,7 @@ class _TodoListState extends State<TodoList> {
   }
 
   void addNewTask() async {
-    final taskTime = await showDialog<DateTime?>(
+    final result = await showDialog<(String, DateTime?)?>(
       context: context,
       builder: (context) {
         return TaskBox(
@@ -35,10 +35,13 @@ class _TodoListState extends State<TodoList> {
       },
     );
 
-    print("dialog exit and received data: $taskTime");
+    print("dialog exit and received data: $result");
+
+    if (result == null) return; // 사용자가 다이얼로그에서 취소 버튼을 누른 경우
+    final (taskName, taskTime) = result;
 
     setState(() {
-      db.todoTask.add([_controller.text, false, taskTime]);
+      db.todoTask.add([taskName, false, taskTime]);
     });
     _controller.clear();
     db.updateData();

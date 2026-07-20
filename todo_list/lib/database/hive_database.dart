@@ -12,7 +12,7 @@ class HiveDatabase {
   }
 
   void readData() {
-    todoTask = _dataBox.get(AppConstants.dbTodoKey);
+    todoTask = _dataBox.get(AppConstants.dbTodoKey) ?? [];
   }
 
   void updateData() {
