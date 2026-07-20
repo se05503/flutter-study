@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'dart:math';
 import 'package:lotto_generator/lotto_ball.dart';
 
@@ -37,25 +38,39 @@ class _LottoState extends State<Lotto> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  LottoBall(path: "svg/${lottoList[index][0]}.svg"),
-                  SizedBox(width: 4),
-                  LottoBall(path: "svg/${lottoList[index][1]}.svg"),
-                  SizedBox(width: 4),
-                  LottoBall(path: "svg/${lottoList[index][2]}.svg"),
-                  SizedBox(width: 4),
-                  LottoBall(path: "svg/${lottoList[index][3]}.svg"),
-                  SizedBox(width: 4),
-                  LottoBall(path: "svg/${lottoList[index][4]}.svg"),
-                  SizedBox(width: 4),
-                  LottoBall(path: "svg/${lottoList[index][5]}.svg"),
-                ],
-              );
-            },
-            itemCount: lottoList.length,
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Row(
+                        children: [
+                          LottoBall(path: "svg/${lottoList[index][0]}.svg"),
+                          SizedBox(width: 4),
+                          LottoBall(path: "svg/${lottoList[index][1]}.svg"),
+                          SizedBox(width: 4),
+                          LottoBall(path: "svg/${lottoList[index][2]}.svg"),
+                          SizedBox(width: 4),
+                          LottoBall(path: "svg/${lottoList[index][3]}.svg"),
+                          SizedBox(width: 4),
+                          LottoBall(path: "svg/${lottoList[index][4]}.svg"),
+                          SizedBox(width: 4),
+                          LottoBall(path: "svg/${lottoList[index][5]}.svg"),
+                        ],
+                      ),
+                    );
+                  },
+                  itemCount: lottoList.length,
+                ),
+              ),
+              SizedBox(
+                width: 150,
+                height: 150,
+                child: Lottie.asset("lottie/lotto_ball.json"),
+              ),
+            ],
           ),
         ),
       ),
