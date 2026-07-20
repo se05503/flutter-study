@@ -59,6 +59,7 @@ class TaskTile extends StatelessWidget {
                 side: BorderSide(color: Colors.white, width: 1),
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     taskName,

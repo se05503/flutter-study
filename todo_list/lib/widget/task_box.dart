@@ -105,7 +105,7 @@ class _TaskBoxState extends State<TaskBox> {
                       return;
                     }
                     Navigator.pop(context, (
-                      widget.controller.text,
+                      widget.controller.text.trim(),
                       _selectedDateTime,
                     ));
                   },
