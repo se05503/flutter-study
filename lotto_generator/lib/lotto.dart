@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:math';
 import 'package:lotto_generator/lotto_ball.dart';
+import 'package:lotto_generator/lotto_history/lotto_number.dart';
 
 class Lotto extends StatefulWidget {
   const Lotto({super.key});
@@ -106,6 +107,17 @@ class _LottoState extends State<Lotto> {
         backgroundColor: Colors.green,
         title: Text("Lotto app"),
         centerTitle: true,
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LottoNumber()),
+              );
+            },
+            child: Text("회차별 당첨번호 보기", style: TextStyle(color: Colors.white)),
+          ),
+        ],
       ),
       body: Center(
         child: Padding(
@@ -189,6 +201,7 @@ class _LottoState extends State<Lotto> {
                 });
               },
               backgroundColor: Colors.lightGreen,
+              heroTag: "Delete",
               child: Icon(Icons.delete, color: Colors.white),
             ),
           ),
@@ -198,6 +211,7 @@ class _LottoState extends State<Lotto> {
             child: FloatingActionButton(
               onPressed: createNumber,
               backgroundColor: Colors.lightGreen,
+              heroTag: "Add",
               child: Icon(Icons.add, color: Colors.white),
             ),
           ),
