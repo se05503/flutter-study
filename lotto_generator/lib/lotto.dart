@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:math';
 import 'package:lotto_generator/lotto_ball.dart';
@@ -14,16 +15,26 @@ class _LottoState extends State<Lotto> {
   List<List<int>> lottoList = [];
 
   void createNumber() {
-    List<int> lottoNumber = [];
-    while (true) {
-      int randomNumber = Random().nextInt(45) + 1;
-      if (!lottoNumber.contains(randomNumber)) lottoNumber.add(randomNumber);
-      if (lottoNumber.length == 6) break;
+    if (lottoList.length < 5) {
+      List<int> lottoNumber = [];
+      while (true) {
+        int randomNumber = Random().nextInt(45) + 1;
+        if (!lottoNumber.contains(randomNumber)) lottoNumber.add(randomNumber);
+        if (lottoNumber.length == 6) break;
+      }
+      lottoNumber.sort();
+      setState(() {
+        lottoList.add(lottoNumber);
+      });
+    } else {
+      Fluttertoast.showToast(
+        msg: "5번(A,B,C,D,E)까지만 생성 가능합니다.",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.lightGreen,
+        textColor: Colors.white,
+      );
     }
-    lottoNumber.sort();
-    setState(() {
-      lottoList.add(lottoNumber); // A,B,C,D,E 총 5번 추가하기
-    });
   }
 
   @override
