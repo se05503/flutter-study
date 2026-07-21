@@ -113,48 +113,55 @@ class _LottoState extends State<Lotto> {
           child: Column(
             children: [
               Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    int drawNumber = index + 1;
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: ListTile(
-                        title: Text(
-                          "$drawNumber번째 추첨번호",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
+                child: Scrollbar(
+                  thumbVisibility: true,
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      int drawNumber = index + 1;
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: ListTile(
+                          title: Text(
+                            "$drawNumber번째 추첨번호",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          subtitle: Row(
+                            children: [
+                              LottoBall(path: "svg/${lottoList[index][0]}.svg"),
+                              SizedBox(width: 4),
+                              LottoBall(path: "svg/${lottoList[index][1]}.svg"),
+                              SizedBox(width: 4),
+                              LottoBall(path: "svg/${lottoList[index][2]}.svg"),
+                              SizedBox(width: 4),
+                              LottoBall(path: "svg/${lottoList[index][3]}.svg"),
+                              SizedBox(width: 4),
+                              LottoBall(path: "svg/${lottoList[index][4]}.svg"),
+                              SizedBox(width: 4),
+                              LottoBall(path: "svg/${lottoList[index][5]}.svg"),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            onPressed: () {
+                              showNumbers(
+                                context,
+                                drawNumber,
+                                lottoList[index],
+                              );
+                            },
+                            icon: Icon(
+                              Icons.summarize,
+                              color: Colors.green,
+                              size: 30,
+                            ),
                           ),
                         ),
-                        subtitle: Row(
-                          children: [
-                            LottoBall(path: "svg/${lottoList[index][0]}.svg"),
-                            SizedBox(width: 4),
-                            LottoBall(path: "svg/${lottoList[index][1]}.svg"),
-                            SizedBox(width: 4),
-                            LottoBall(path: "svg/${lottoList[index][2]}.svg"),
-                            SizedBox(width: 4),
-                            LottoBall(path: "svg/${lottoList[index][3]}.svg"),
-                            SizedBox(width: 4),
-                            LottoBall(path: "svg/${lottoList[index][4]}.svg"),
-                            SizedBox(width: 4),
-                            LottoBall(path: "svg/${lottoList[index][5]}.svg"),
-                          ],
-                        ),
-                        trailing: IconButton(
-                          onPressed: () {
-                            showNumbers(context, drawNumber, lottoList[index]);
-                          },
-                          icon: Icon(
-                            Icons.summarize,
-                            color: Colors.green,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  itemCount: lottoList.length,
+                      );
+                    },
+                    itemCount: lottoList.length,
+                  ),
                 ),
               ),
               SizedBox(
