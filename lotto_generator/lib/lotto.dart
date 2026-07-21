@@ -166,10 +166,27 @@ class _LottoState extends State<Lotto> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: createNumber,
-        backgroundColor: Colors.lightGreen,
-        child: Icon(Icons.add, color: Colors.white),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            right: 4,
+            bottom: 80,
+            child: FloatingActionButton(
+              onPressed: createNumber,
+              backgroundColor: Colors.lightGreen,
+              child: Icon(Icons.delete, color: Colors.white),
+            ),
+          ),
+          Positioned(
+            right: 4,
+            bottom: 8,
+            child: FloatingActionButton(
+              onPressed: createNumber,
+              backgroundColor: Colors.lightGreen,
+              child: Icon(Icons.add, color: Colors.white),
+            ),
+          ),
+        ],
       ),
     );
   }
