@@ -169,8 +169,12 @@ class _LottoState extends State<Lotto> {
       floatingActionButton: Stack(
         children: [
           Positioned(
-            right: 4,
-            bottom: 80,
+            right: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 4
+                : 80,
+            bottom: MediaQuery.of(context).orientation == Orientation.portrait
+                ? 80
+                : 8,
             child: FloatingActionButton(
               onPressed: () {
                 setState(() {
