@@ -172,7 +172,11 @@ class _LottoState extends State<Lotto> {
             right: 4,
             bottom: 80,
             child: FloatingActionButton(
-              onPressed: createNumber,
+              onPressed: () {
+                setState(() {
+                  lottoList.clear();
+                });
+              },
               backgroundColor: Colors.lightGreen,
               child: Icon(Icons.delete, color: Colors.white),
             ),
