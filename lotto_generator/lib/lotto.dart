@@ -37,6 +37,67 @@ class _LottoState extends State<Lotto> {
     }
   }
 
+  void showNumbers(BuildContext context, int drawNumber, List<int> lottoList) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            height: 320,
+            padding: EdgeInsetsGeometry.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  "$drawNumber번째 추첨번호",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "$lottoList",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Lottie.asset("lottie/lotto_ball.json"),
+                ),
+                SizedBox(height: 36),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(fixedSize: Size(200, 50)),
+                  child: Text(
+                    "닫기",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +142,9 @@ class _LottoState extends State<Lotto> {
                           ],
                         ),
                         trailing: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showNumbers(context, drawNumber, lottoList[index]);
+                          },
                           icon: Icon(
                             Icons.summarize,
                             color: Colors.green,
