@@ -56,6 +56,7 @@ class _LottoNumberState extends State<LottoNumber> {
               ],
             ),
           ),
+          SizedBox(height: 12),
           FutureBuilder<LottoResult>(
             future: lottoResult,
             builder: (context, snapshot) {
@@ -80,13 +81,15 @@ class _LottoNumberState extends State<LottoNumber> {
                       ),
                     ),
                     Text(
-                      "추첨일: ${result.ltRflYmd}",
+                      "추첨일: ${result.ltRflYmd.substring(0, 4)}.${result.ltRflYmd.substring(4, 6)}.${result.ltRflYmd.substring(6, 8)}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
                       ),
                     ),
+                    SizedBox(height: 12),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _lottoBall(result.tm1WnNo),
                         _lottoBall(result.tm2WnNo),
@@ -96,6 +99,7 @@ class _LottoNumberState extends State<LottoNumber> {
                         _lottoBall(result.tm6WnNo),
                       ],
                     ),
+                    SizedBox(height: 12),
                     Text(
                       "보너스 번호",
                       style: TextStyle(
@@ -103,6 +107,7 @@ class _LottoNumberState extends State<LottoNumber> {
                         fontSize: 12,
                       ),
                     ),
+                    SizedBox(height: 8),
                     _lottoBall(result.bnsWnNo, isBonus: true),
                   ],
                 );
@@ -126,6 +131,11 @@ Widget _lottoBall(int number, {bool isBonus = false}) {
       shape: BoxShape.circle,
     ),
     // alignment: Alignment.center,
-    child: Text("$number", style: TextStyle(color: Colors.white, fontSize: 12)),
+    child: Center(
+      child: Text(
+        "$number",
+        style: TextStyle(color: Colors.white, fontSize: 16),
+      ),
+    ),
   );
 }
