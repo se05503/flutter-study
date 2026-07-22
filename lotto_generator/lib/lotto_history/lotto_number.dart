@@ -11,12 +11,31 @@ class LottoNumber extends StatefulWidget {
 class _LottoNumberState extends State<LottoNumber> {
   final TextEditingController controller = TextEditingController();
   Future<LottoResult>? lottoResult;
+  int? latestRound;
 
   void fetchNewRound(int selectedRount) {
     setState(() {
       lottoResult = fetchLottoResult(selectedRount);
     });
     controller.clear();
+  }
+
+  void _loadLatestRound() async {
+    final firstDraw = DateTime(2002, 12, 7); // 1회차 날짜
+    final now = DateTime.now();
+    final estimated = now.difference(firstDraw).inDays ~/ 7 + 1;
+    try {
+      await fetchLottoResult(estimated);
+      setState(() => latestRound = estimated);
+    } catch (_) {
+      setState(() => latestRound = estimated - 1);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLatestRound(); // 최신 회차 정보 불러오기
   }
 
   @override
@@ -34,6 +53,10 @@ class _LottoNumberState extends State<LottoNumber> {
                     controller: controller,
                     decoration: InputDecoration(
                       labelText: "회차 번호 입력",
+                      hintText: latestRound != null
+                          ? "가장 최근 회차: $latestRound회차"
+                          : "불러오는 중...",
+                      hintStyle: TextStyle(color: Colors.grey),
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -43,8 +66,17 @@ class _LottoNumberState extends State<LottoNumber> {
                   onPressed: () {
                     final inputText = controller.text;
                     final selectedRound = int.tryParse(inputText);
-                    if (selectedRound != null) {
+
+                    if (selectedRound != null &&
+                        selectedRound >= 1 &&
+                        selectedRound <= latestRound!) {
                       fetchNewRound(selectedRound);
+                    } else if (selectedRound != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("1 ~ $latestRound 사이의 회차를 입력해주세요!"),
+                        ),
+                      );
                     } else {
                       ScaffoldMessenger.of(
                         context,
