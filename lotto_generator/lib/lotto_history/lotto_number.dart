@@ -13,7 +13,9 @@ class _LottoNumberState extends State<LottoNumber> {
   Future<LottoResult>? lottoResult;
 
   void fetchNewRound(int selectedRount) {
-    lottoResult = fetchLottoResult(selectedRount);
+    setState(() {
+      lottoResult = fetchLottoResult(selectedRount);
+    });
     controller.clear();
   }
 
@@ -63,20 +65,22 @@ class _LottoNumberState extends State<LottoNumber> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
+                print("에러 내용: ${snapshot.error}");
                 return Center(child: Text("데이터를 불러오지 못했습니다."));
               } else if (snapshot.hasData) {
                 final result = snapshot.data!;
+                print("받아온 데이터: ${result.toString()}");
                 return Column(
                   children: [
                     Text(
-                      "회차: ${result.drwNo}",
+                      "회차: ${result.ltEpsd}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
                     ),
                     Text(
-                      "추첨일: ${result.drwNoDate}",
+                      "추첨일: ${result.ltRflYmd}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -84,12 +88,12 @@ class _LottoNumberState extends State<LottoNumber> {
                     ),
                     Row(
                       children: [
-                        _lottoBall(result.drwtNo1),
-                        _lottoBall(result.drwtNo2),
-                        _lottoBall(result.drwtNo3),
-                        _lottoBall(result.drwtNo4),
-                        _lottoBall(result.drwtNo5),
-                        _lottoBall(result.drwtNo6),
+                        _lottoBall(result.tm1WnNo),
+                        _lottoBall(result.tm2WnNo),
+                        _lottoBall(result.tm3WnNo),
+                        _lottoBall(result.tm4WnNo),
+                        _lottoBall(result.tm5WnNo),
+                        _lottoBall(result.tm6WnNo),
                       ],
                     ),
                     Text(
@@ -99,7 +103,7 @@ class _LottoNumberState extends State<LottoNumber> {
                         fontSize: 12,
                       ),
                     ),
-                    _lottoBall(result.bnusNo, isBonus: true),
+                    _lottoBall(result.bnsWnNo, isBonus: true),
                   ],
                 );
               } else {
