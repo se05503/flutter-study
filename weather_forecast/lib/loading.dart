@@ -1,7 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:weather_forecast/data/my_location.dart';
+import 'package:weather_forecast/data/network.dart';
+import 'package:weather_forecast/weather_screen.dart';
+
+const String apiKey = "64e9384697d9721ee4eb181e4db51b8d";
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -11,27 +13,31 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
+  double? longitude2;
+  double? latitude2;
+
   void _getLocation() async {
-    try {
-      LocationPermission permission = await Geolocator.requestPermission();
+    MyLocation myLocation = MyLocation();
+    await myLocation.getCurrentLocation(context);
+    longitude2 = myLocation.longitude;
+    latitude2 = myLocation.latitude;
+    Network network = Network(
+      "https://api.openweathermap.org/data/2.5/weather?lat=$latitude2&lon=$longitude2&appid=$apiKey&units=metric",
+    );
+    var weatherData = await network.getJsonData();
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WeatherScreen(weatherData: weatherData),
+      ),
+    );
+  }
 
-      final LocationSettings locationSettings = LocationSettings(
-        accuracy: LocationAccuracy.high,
-        distanceFilter: 100,
-      );
-
-      Position position = await Geolocator.getCurrentPosition(
-        locationSettings: locationSettings,
-      );
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("현재 위치: $position")));
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("위치 정보수신에 문제가 생겼습니다.")));
-    }
+  @override
+  void initState() {
+    super.initState();
+    _getLocation();
   }
 
   @override
