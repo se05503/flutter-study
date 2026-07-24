@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast/data/my_location.dart';
+import 'package:weather_forecast/data/user_location.dart';
 import 'package:weather_forecast/data/network.dart';
 import 'package:weather_forecast/weather_screen.dart';
-
-const String apiKey = "64e9384697d9721ee4eb181e4db51b8d";
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -13,18 +11,33 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  double? longitude2;
-  double? latitude2;
-
   void _getLocation() async {
-    MyLocation myLocation = MyLocation();
-    await myLocation.getCurrentLocation(context);
-    longitude2 = myLocation.longitude;
-    latitude2 = myLocation.latitude;
+    UserLocation myLocation = UserLocation();
+    var result = await myLocation.getCurrentLocation(context);
+
+    if (result == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("위치 정보수신에 문제가 생겼습니다.")));
+      return;
+    }
+
+    var (latitude, longitude) = result;
+
     Network network = Network(
-      "https://api.openweathermap.org/data/2.5/weather?lat=$latitude2&lon=$longitude2&appid=$apiKey&units=metric",
+      "https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric",
     );
-    var weatherData = await network.getJsonData();
+
+    Map<String, dynamic>? weatherData = await network.getJsonData();
+    if (weatherData == null) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("날씨 정보수신에 문제가 생겼습니다.")));
+      return;
+    }
+
     if (!mounted) return;
     Navigator.push(
       context,
@@ -32,12 +45,6 @@ class _LoadingState extends State<Loading> {
         builder: (context) => WeatherScreen(weatherData: weatherData),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getLocation();
   }
 
   @override

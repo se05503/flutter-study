@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatefulWidget {
-  const WeatherScreen({super.key, this.weatherData});
-  final dynamic weatherData;
+  const WeatherScreen({super.key, required this.weatherData});
+  final Map<String, dynamic> weatherData;
 
   @override
   State<WeatherScreen> createState() => _WeatherScreenState();
