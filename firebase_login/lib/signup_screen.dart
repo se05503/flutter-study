@@ -1,15 +1,15 @@
-import 'package:firebase_login/signup_screen.dart';
+import 'package:firebase_login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: [
                 SizedBox(height: 60),
-                Image.asset("images/signin.png", width: 300)
+                Image.asset("images/signup.jpg", width: 300)
                     .animate()
                     .fade()
                     .slideY(begin: -3)
@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     .shake(hz: 1, curve: Curves.decelerate, duration: 1800.ms),
                 SizedBox(height: 20),
                 Text(
-                      "WelCome back!",
+                      "WelCome!",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     .animate(onPlay: (controller) => controller.repeat())
                     .shimmer(delay: 1000.ms, duration: 2000.ms),
                 Text(
-                  "Sign in to continue",
+                  "Sign up to continue",
                   style: TextStyle(color: Colors.grey, fontSize: 14),
                 ).animate().fade(delay: 1500.ms),
                 SizedBox(height: 32),
@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Not a member?",
+                      "Already a member?",
                       style: TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.bold,
@@ -107,12 +107,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignUpScreen(),
+                            builder: (context) => LoginScreen(),
                           ),
                         );
                       },
                       child: Text(
-                        "Sign up",
+                        "Log in",
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
