@@ -1,6 +1,6 @@
 {
-    "name": "fast_app_base",
-    "short_name": "fast_app_base",
+    "name": "toth_stock",
+    "short_name": "toth_stock",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
