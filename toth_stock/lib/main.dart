@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:toth_stock/screen/main/s_main.dart';
+import 'package:toth_stock/screen/main/s_main_screen.dart';
 
 void main() {
   // 앱 엔진 초기화
