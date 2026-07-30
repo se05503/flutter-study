@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:toth_stock/common/color/colors.dart';
 
 class TossAppBar extends StatefulWidget {
   const TossAppBar({super.key});
@@ -16,7 +17,7 @@ class _TossAppBarState extends State<TossAppBar> {
     return SafeArea(
       child: Container(
         height: 60,
-        color: Colors.black45,
+        color: AbstractThemeColors.appBarBackground,
         child: Row(
           children: [
             SizedBox(width: 16),
