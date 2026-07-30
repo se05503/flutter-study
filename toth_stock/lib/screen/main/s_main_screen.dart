@@ -8,6 +8,7 @@ import 'package:toth_stock/screen/main/tosspay/f_tosspay.dart';
 import 'package:toth_stock/screen/main/total/f_total.dart';
 
 class MainScreen extends StatefulWidget {
+  static const double bottomNavigationHeight = 66;
   const MainScreen({super.key});
 
   @override
@@ -38,23 +39,26 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: IndexedStack(index: _currentIndex, children: _pages),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        items: [
-          _buildBottomItem("home", "홈"),
-          _buildBottomItem("benefit", "혜택"),
-          _buildBottomItem("toss_pay", "토스페이"),
-          _buildBottomItem("stock", "주식"),
-          _buildBottomItem("total", "전체"),
-        ],
+      bottomNavigationBar: SizedBox(
+        height: MainScreen.bottomNavigationHeight,
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          items: [
+            _buildBottomItem("home", "홈"),
+            _buildBottomItem("benefit", "혜택"),
+            _buildBottomItem("toss_pay", "토스페이"),
+            _buildBottomItem("stock", "주식"),
+            _buildBottomItem("total", "전체"),
+          ],
+        ),
       ),
     );
   }

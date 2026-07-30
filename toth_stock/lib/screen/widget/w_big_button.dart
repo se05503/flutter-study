@@ -10,18 +10,21 @@ class BigButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RoundedContainer(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(text, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-          SvgPicture.asset(
-            'assets/image/ic_arrow_right.svg',
-            width: 16,
-            height: 16,
-            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-          ),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: RoundedContainer(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(text, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+            SvgPicture.asset(
+              'assets/image/ic_arrow_right.svg',
+              width: 16,
+              height: 16,
+              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            ),
+          ],
+        ),
       ),
     );
   }

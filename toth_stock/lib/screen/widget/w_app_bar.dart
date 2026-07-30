@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:toth_stock/common/color/colors.dart';
 
 class TossAppBar extends StatefulWidget {
+  static const double appBarHeight = 60;
   const TossAppBar({super.key});
 
   @override
@@ -16,7 +17,7 @@ class _TossAppBarState extends State<TossAppBar> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        height: 60,
+        height: TossAppBar.appBarHeight,
         color: AbstractThemeColors.appBarBackground,
         child: Row(
           children: [
