@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:toth_stock/common/color/colors.dart';
+import 'package:toth_stock/screen/notification/s_notification.dart';
 
 class TossAppBar extends StatefulWidget {
   static const double appBarHeight = 60;
@@ -38,13 +39,18 @@ class _TossAppBarState extends State<TossAppBar> {
             SizedBox(width: 8),
             Stack(
               children: [
-                SvgPicture.asset(
-                  'assets/image/ic_notification.svg',
-                  width: 24,
-                  height: 24,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.grey,
-                    BlendMode.srcIn,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScreen()));
+                  },
+                  child: SvgPicture.asset(
+                    'assets/image/ic_notification.svg',
+                    width: 24,
+                    height: 24,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.grey,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
                 if (_showRedDot)
