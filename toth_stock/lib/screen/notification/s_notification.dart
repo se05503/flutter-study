@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toth_stock/common/color/app_colors.dart';
 import 'package:toth_stock/data/notifications_dummy.dart';
+import 'package:toth_stock/screen/dialog/NotificationDialog.dart';
 import 'package:toth_stock/screen/widget/w_notification_item.dart';
 
 import '../../common/color/colors.dart';
@@ -26,8 +27,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) =>
-                  NotificationItem(notification: notificationDummies[index]),
+              (context, index) => NotificationItem(
+                notification: notificationDummies[index],
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => NotificationDialog(
+                      notificationDummies[index]
+                    ),
+                  );
+                },
+              ),
               childCount: notificationDummies.length,
             ),
           ),
