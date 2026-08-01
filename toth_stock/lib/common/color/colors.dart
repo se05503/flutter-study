@@ -44,4 +44,6 @@ class AbstractThemeColors {
   static Color get appBarBackground => const Color.fromARGB(255, 16, 16, 18);
   static Color get buttonBackground => const Color.fromARGB(255, 48, 48, 48);
   static Color get roundedLayoutBackground => const Color.fromARGB(255, 24, 24, 24);
+  static Color get unreadColor => const Color.fromARGB(255, 48, 48, 48);
+  static Color get lessImportantColor => AppColors.grey;
 }
