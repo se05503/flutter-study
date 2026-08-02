@@ -40,7 +40,19 @@ class _StockFragmentState extends State<StockFragment> {
       ],
     );
   }
-  Widget get title => Placeholder();
+  Widget get title => Padding(
+    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text("토스증권", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24)),
+        SizedBox(width: 10,),
+        Text("S&P 500", style: TextStyle(color: AbstractThemeColors.lessImportantColor, fontWeight: FontWeight.bold, fontSize: 13)),
+        SizedBox(width: 10,),
+        Text("3,919.29", style: TextStyle(color: AbstractThemeColors.plus, fontWeight: FontWeight.bold, fontSize: 13)),
+      ],
+    ),
+  );
   Widget get tabBar => Placeholder();
   Widget get myAccount => Placeholder();
   Widget get interestedStocks => Placeholder();
