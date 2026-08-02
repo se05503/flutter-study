@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/color/colors.dart';
+import 'f_my_stock.dart';
+import 'f_today_discovery.dart';
 
 class StockFragment extends StatefulWidget {
   const StockFragment({super.key});
@@ -9,21 +11,37 @@ class StockFragment extends StatefulWidget {
   State<StockFragment> createState() => _StockFragmentState();
 }
 
-class _StockFragmentState extends State<StockFragment> {
+class _StockFragmentState extends State<StockFragment>
+    with SingleTickerProviderStateMixin {
+  late final tabController = TabController(length: 2, vsync: this);
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
           pinned: true,
-          backgroundColor: AbstractThemeColors.appBarBackground,
+          backgroundColor: AbstractThemeColors.roundedLayoutBackground,
           actions: [
-            Image.asset("assets/image/ic_stock_search.png", width: 30, height: 30),
-            SizedBox(width: 10,),
-            Image.asset("assets/image/ic_stock_calendar.png", width: 30, height: 30),
-            SizedBox(width: 10,),
-            Image.asset("assets/image/ic_stock_settings.png", width: 30, height: 30),
-            SizedBox(width: 10,),
+            Image.asset(
+              "assets/image/ic_stock_search.png",
+              width: 30,
+              height: 30,
+            ),
+            SizedBox(width: 10),
+            Image.asset(
+              "assets/image/ic_stock_calendar.png",
+              width: 30,
+              height: 30,
+            ),
+            SizedBox(width: 10),
+            Image.asset(
+              "assets/image/ic_stock_settings.png",
+              width: 30,
+              height: 30,
+            ),
+            SizedBox(width: 10),
           ],
         ),
         SliverToBoxAdapter(
@@ -31,29 +49,76 @@ class _StockFragmentState extends State<StockFragment> {
             children: [
               title,
               tabBar,
-              myAccount,
-              SizedBox(height: 20,),
-              interestedStocks
+              if(currentIndex == 0) const MyStockFragment() else const TodayDiscoveryFragment()
             ],
           ),
-        )
+        ),
       ],
     );
   }
-  Widget get title => Padding(
-    padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+
+  Widget get title => Container(
+    color: AbstractThemeColors.roundedLayoutBackground,
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text("토스증권", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24)),
-        SizedBox(width: 10,),
-        Text("S&P 500", style: TextStyle(color: AbstractThemeColors.lessImportantColor, fontWeight: FontWeight.bold, fontSize: 13)),
-        SizedBox(width: 10,),
-        Text("3,919.29", style: TextStyle(color: AbstractThemeColors.plus, fontWeight: FontWeight.bold, fontSize: 13)),
+        SizedBox(width: 16,),
+        Text(
+          "토스증권",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
+        SizedBox(width: 10),
+        Text(
+          "S&P 500",
+          style: TextStyle(
+            color: AbstractThemeColors.lessImportantColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+          ),
+        ),
+        SizedBox(width: 10),
+        Text(
+          "3,919.29",
+          style: TextStyle(
+            color: AbstractThemeColors.plus,
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+          ),
+        ),
       ],
     ),
   );
-  Widget get tabBar => Placeholder();
+
+  Widget get tabBar => Container(
+    color: AbstractThemeColors.roundedLayoutBackground,
+    child: Column(
+      children: [
+        TabBar(
+          onTap: (currentIndex) {
+            setState(() {
+              this.currentIndex = currentIndex;
+            });
+          },
+          labelColor: Colors.white,
+          unselectedLabelColor: AbstractThemeColors.lessImportantColor,
+          labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          labelPadding: const EdgeInsets.symmetric(vertical: 16),
+          indicatorColor: Colors.white,
+          indicatorSize: TabBarIndicatorSize.tab,
+          indicatorWeight: 2,
+          indicatorPadding: const EdgeInsets.symmetric(horizontal: 30),
+          controller: tabController,
+          tabs: [Text("내 주식"), Text("오늘의 발견")],
+        ),
+      ],
+    ),
+  );
+
   Widget get myAccount => Placeholder();
+
   Widget get interestedStocks => Placeholder();
 }
