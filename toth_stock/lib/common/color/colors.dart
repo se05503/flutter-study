@@ -25,7 +25,7 @@ class AbstractThemeColors {
 
   static Color get badgeBorder => Colors.transparent;
 
-  static Color get divider => const Color.fromARGB(255, 228, 228, 228);
+  static Color get divider => const Color.fromARGB(255, 80, 80, 80);
 
   static Color get text => AppColors.darkGrey;
 
