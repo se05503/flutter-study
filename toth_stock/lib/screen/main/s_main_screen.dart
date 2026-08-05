@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:toth_stock/common/color/colors.dart';
 import 'package:toth_stock/screen/main/benefit/f_benefit.dart';
 import 'package:toth_stock/screen/main/home/f_home.dart';
 import 'package:toth_stock/screen/main/stock/f_stock.dart';
@@ -42,6 +43,7 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: SizedBox(
         height: MainScreen.bottomNavigationHeight,
         child: BottomNavigationBar(
+          backgroundColor: AbstractThemeColors.appBarBackground,
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
@@ -49,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.black,
+          selectedItemColor: Colors.white,
           unselectedItemColor: Colors.grey,
           items: [
             _buildBottomItem("home", "홈"),
@@ -75,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
         'assets/image/ic_$iconName.svg',
         width: 24,
         height: 24,
-        colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
       ),
       label: label,
     );
