@@ -4,6 +4,7 @@ import 'package:toth_stock/common/color/colors.dart';
 import 'package:toth_stock/screen/widget/w_rounded_container.dart';
 
 import '../../widget/LongButton.dart';
+import '../../widget/w_interest_stock_list.dart';
 
 class MyStockFragment extends StatelessWidget {
   const MyStockFragment({super.key});
@@ -75,5 +76,45 @@ class MyStockFragment extends StatelessWidget {
     ),
   );
 
-  Widget interestedStocks(BuildContext context) => Placeholder();
+  Widget interestedStocks(BuildContext context) => Container(
+    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+    color: AbstractThemeColors.roundedLayoutBackground,
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "관심 주식",
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            Text(
+              "편집하기",
+              style: TextStyle(
+                color: AbstractThemeColors.lessImportantColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 20,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("기본", style: TextStyle(color: Colors.white)),
+            SvgPicture.asset(
+              "assets/image/ic_arrow_right.svg",
+              width: 16,
+              height: 16,
+              colorFilter: ColorFilter.mode(
+                AbstractThemeColors.lessImportantColor,
+                BlendMode.srcIn,
+              ),
+            ),
+          ],
+        ),
+        InterestStockList()
+      ],
+    ),
+  );
 }

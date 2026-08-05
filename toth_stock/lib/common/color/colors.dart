@@ -46,5 +46,6 @@ class AbstractThemeColors {
   static Color get roundedLayoutBackground => const Color.fromARGB(255, 24, 24, 24);
   static Color get unreadColor => const Color.fromARGB(255, 48, 48, 48);
   static Color get lessImportantColor => AppColors.grey;
-  static Color get plus => const Color.fromARGB(255, 230, 71, 83);
+  static const Color plus = Color.fromARGB(255, 230, 71, 83);
+  static const Color minus = Color.fromARGB(255, 9, 110, 216);
 }

@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:toth_stock/common/color/colors.dart';
+
 class SimpleStock {
   final String name;
 
@@ -24,6 +28,30 @@ class Stock extends PopularStock {
     required super.currentPrice,
     required super.name,
   });
+
+  double get todayPercentage =>
+      (currentPrice - yesterdayClosePrice) / yesterdayClosePrice * 100;
+
+  String get todayPercentageString =>
+      "$symbol${todayPercentage.toStringAsFixed(1)}%";
+
+  bool get isPlus => currentPrice > yesterdayClosePrice;
+
+  bool get isSame => currentPrice == yesterdayClosePrice;
+
+  bool get isMinus => currentPrice < yesterdayClosePrice;
+
+  String get symbol => isSame
+      ? ""
+      : isPlus
+      ? "+"
+      : "-";
+
+  Color get color => isSame
+      ? AbstractThemeColors.lessImportantColor
+      : isPlus
+      ? AbstractThemeColors.plus
+      : AbstractThemeColors.minus;
 }
 
 List<Stock> get myInterestStocks => [
