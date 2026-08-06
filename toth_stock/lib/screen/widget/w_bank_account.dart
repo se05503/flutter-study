@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:toth_stock/common/color/colors.dart';
 import 'package:toth_stock/screen/widget/w_rounded_container.dart';
 
@@ -20,17 +21,31 @@ class BankAccountWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(account.accountTypeName ?? "${account.bank.name} 통장",
-                    style: TextStyle(color: Colors.white, fontSize: 12)),
-                Text("${account.balance}원", style: TextStyle(color: Colors.white,
+                Text(
+                  account.accountTypeName ?? "${account.bank.name} 통장",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                ),
+                Text(
+                  "${NumberFormat('#,###').format(account.balance)}원",
+                  style: TextStyle(
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 18)),
+                    fontSize: 18,
+                  ),
+                ),
               ],
             ),
           ),
         ),
-        RoundedContainer(backgroundColor: AbstractThemeColors.buttonBackground, padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), borderRadius: 10, child: Text("송금",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),))
+        RoundedContainer(
+          backgroundColor: AbstractThemeColors.buttonBackground,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          borderRadius: 10,
+          child: Text(
+            "송금",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
       ],
     );
   }

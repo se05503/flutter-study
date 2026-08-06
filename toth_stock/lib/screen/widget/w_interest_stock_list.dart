@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:toth_stock/data/vo_stock.dart';
 import '../../common/color/colors.dart';
 
@@ -51,7 +52,7 @@ class StockItem extends StatelessWidget {
               ),
               SizedBox(height: 4,),
               Text(
-                "${stock.currentPrice}원",
+                "${NumberFormat('#,###').format(stock.currentPrice)}원",
                 style: TextStyle(
                   color: AbstractThemeColors.lessImportantColor,
                 ),
