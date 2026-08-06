@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.3.0
   timeago: ^3.7.1
   intl: ^0.20.3
+  get: ^4.7.3
 
 dev_dependencies:
   flutter_test:
