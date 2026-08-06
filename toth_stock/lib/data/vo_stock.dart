@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:toth_stock/common/color/colors.dart';
 
 class SimpleStock {
@@ -63,61 +62,61 @@ List<Stock> get myInterestStocks => [
   ),
   Stock(
     name: '현대모비스',
-    imagePath: 'assets/image/stock/interest_stock_02.png',
+    imagePath: 'assets/image/interest_stock_02.png',
     currentPrice: 219000,
     yesterdayClosePrice: 217000,
   ),
   Stock(
     name: '셀트리온',
-    imagePath: 'assets/image/stock/interest_stock_03.png',
+    imagePath: 'assets/image/interest_stock_03.png',
     currentPrice: 78000,
     yesterdayClosePrice: 80000,
   ),
   Stock(
     name: '하이브',
-    imagePath: 'assets/image/stock/interest_stock_04.png',
+    imagePath: 'assets/image/interest_stock_04.png',
     currentPrice: 92300,
     yesterdayClosePrice: 80000,
   ),
   Stock(
     name: 'LG헬로비전',
-    imagePath: 'assets/image/stock/interest_stock_05.png',
+    imagePath: 'assets/image/interest_stock_05.png',
     currentPrice: 82000,
     yesterdayClosePrice: 80000,
   ),
   Stock(
     name: '대한전선',
-    imagePath: 'assets/image/stock/interest_stock_06.png',
+    imagePath: 'assets/image/interest_stock_06.png',
     currentPrice: 82000,
     yesterdayClosePrice: 80000,
   ),
   Stock(
     name: 'SK하이닉스',
-    imagePath: 'assets/image/stock/interest_stock_07.png',
+    imagePath: 'assets/image/interest_stock_07.png',
     currentPrice: 82000,
     yesterdayClosePrice: 80000,
   ),
   Stock(
     name: '삼성전자',
-    imagePath: 'assets/image/stock/interest_stock_08.png',
+    imagePath: 'assets/image/interest_stock_08.png',
     currentPrice: 82000,
     yesterdayClosePrice: 80000,
   ),
   Stock(
     name: '카카오',
-    imagePath: 'assets/image/stock/interest_stock_09.png',
+    imagePath: 'assets/image/interest_stock_09.png',
     currentPrice: 82000,
     yesterdayClosePrice: 80000,
   ),
   Stock(
     name: 'LG화학',
-    imagePath: 'assets/image/stock/interest_stock_10.png',
+    imagePath: 'assets/image/interest_stock_10.png',
     currentPrice: 82000,
     yesterdayClosePrice: 80000,
   ),
   Stock(
     name: '삼양옵틱스',
-    imagePath: 'assets/image/stock/interest_stock_11.png',
+    imagePath: 'assets/image/interest_stock_11.png',
     currentPrice: 82000,
     yesterdayClosePrice: 80000,
   ),
