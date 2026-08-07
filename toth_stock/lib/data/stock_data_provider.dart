@@ -10,7 +10,7 @@ abstract mixin class StockDataProvider {
       (currentPrice - yesterdayClosePrice) / yesterdayClosePrice * 100;
 
   String get todayPercentageString =>
-      "$symbol${todayPercentage.toStringAsFixed(1)}%";
+      "$symbol${todayPercentage.abs().toStringAsFixed(1)}%";
 
   bool get isPlus => currentPrice > yesterdayClosePrice;
 

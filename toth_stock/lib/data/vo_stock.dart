@@ -99,3 +99,18 @@ List<Stock> get myInterestStocks => [
     yesterdayClosePrice: 80000,
   ),
 ];
+
+List<PopularStock> popularStockList = [
+  PopularStock(name: "삼성전자", yesterdayClosePrice: 84400, currentPrice: 82500),
+  PopularStock(name: "SK하이닉스", yesterdayClosePrice: 190000, currentPrice: 185200),
+  PopularStock(name: "삼성바이오로직스", yesterdayClosePrice: 910000, currentPrice: 925000),
+  PopularStock(name: "현대차", yesterdayClosePrice: 245000, currentPrice: 243500),
+  PopularStock(name: "셀트리온", yesterdayClosePrice: 195000, currentPrice: 202000),
+  PopularStock(name: "기아", yesterdayClosePrice: 112000, currentPrice: 112500),
+  PopularStock(name: "KB금융", yesterdayClosePrice: 85000, currentPrice: 86200),
+  PopularStock(name: "신한지주", yesterdayClosePrice: 55000, currentPrice: 54100),
+  PopularStock(name: "NAVER", yesterdayClosePrice: 172000, currentPrice: 175000),
+  PopularStock(name: "카카오", yesterdayClosePrice: 38000, currentPrice: 37500),
+  PopularStock(name: "LG화학", yesterdayClosePrice: 320000, currentPrice: 318000),
+  PopularStock(name: "에코프로비엠", yesterdayClosePrice: 185000, currentPrice: 189500),
+];
