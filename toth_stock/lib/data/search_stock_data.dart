@@ -19,4 +19,12 @@ class SearchStockData extends GetxController {
     final List<SimpleStock> stockList = jsonResponse.map((element) => SimpleStock.fromJson(element)).toList();
     stocks.addAll(stockList);
   }
+
+  void search(String keyword) {
+    if(keyword.isEmpty) {
+      autoCompleteList.value = [];
+      return;
+    }
+    autoCompleteList.value = stocks.where((element) => element.name.contains(keyword)).toList();
+  }
 }

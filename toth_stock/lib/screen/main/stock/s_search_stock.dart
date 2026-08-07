@@ -4,6 +4,7 @@ import 'package:toth_stock/common/color/colors.dart';
 import 'package:toth_stock/data/search_stock_data.dart';
 import '../../widget/w_stock_search_app_bar.dart';
 import 'f_popular_search_stock.dart';
+import 'f_search_auto_complete_list.dart';
 import 'f_search_stock_history.dart';
 
 class SearchStockScreen extends StatefulWidget {
@@ -15,10 +16,14 @@ class SearchStockScreen extends StatefulWidget {
 
 class _SearchStockScreenState extends State<SearchStockScreen> {
   final controller = TextEditingController();
+  late final searchData = Get.find<SearchStockData>();
 
   @override
   void initState() {
     Get.put(SearchStockData());
+    controller.addListener(() {
+      searchData.search(controller.text);
+    });
     super.initState();
   }
 
@@ -33,10 +38,13 @@ class _SearchStockScreenState extends State<SearchStockScreen> {
     return Scaffold(
       backgroundColor: AbstractThemeColors.roundedLayoutBackground,
       appBar: StockSearchAppBar(controller: controller),
-      body: ListView(children: [
-        SearchStockHistoryList(),
-        PopularSearchStockList()
-      ],),
+      body: Obx(() {
+        return searchData.autoCompleteList.isEmpty
+            ? ListView(
+                children: [SearchStockHistoryList(), PopularSearchStockList()],
+              )
+            : SearchAutoCompleteList();
+      }),
     );
   }
 }
