@@ -2,8 +2,10 @@ import 'package:toth_stock/data/stock_data_provider.dart';
 
 class SimpleStock {
   final String name;
-
   SimpleStock(this.name);
+  factory SimpleStock.fromJson(Map<String, dynamic> json) {
+    return SimpleStock(json["name"]);
+  }
 }
 
 class PopularStock extends SimpleStock with StockDataProvider {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../common/color/colors.dart';
 import 'f_my_stock.dart';
-import 'f_search_stock.dart';
+import 's_search_stock.dart';
 import 'f_today_discovery.dart';
 
 class StockFragment extends StatefulWidget {
@@ -26,7 +26,7 @@ class _StockFragmentState extends State<StockFragment>
           actions: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchStockFragment()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchStockScreen()));
               },
               child: Image.asset(
                 "assets/image/ic_stock_search.png",
