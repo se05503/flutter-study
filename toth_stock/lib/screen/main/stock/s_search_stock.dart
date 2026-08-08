@@ -14,9 +14,8 @@ class SearchStockScreen extends StatefulWidget {
   State<SearchStockScreen> createState() => _SearchStockScreenState();
 }
 
-class _SearchStockScreenState extends State<SearchStockScreen> {
+class _SearchStockScreenState extends State<SearchStockScreen> with SearchDataProvider {
   final controller = TextEditingController();
-  late final searchData = Get.find<SearchStockData>();
 
   @override
   void initState() {

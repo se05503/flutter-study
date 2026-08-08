@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:toth_stock/data/search_stock_data.dart';
 
-class SearchAutoCompleteList extends StatelessWidget {
+class SearchAutoCompleteList extends StatelessWidget with SearchDataProvider {
   SearchAutoCompleteList({super.key});
-
-  late final searchData = Get.find<SearchStockData>();
 
   @override
   Widget build(BuildContext context) {
