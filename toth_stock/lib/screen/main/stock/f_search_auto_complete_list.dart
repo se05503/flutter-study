@@ -16,8 +16,8 @@ class SearchAutoCompleteList extends StatelessWidget with SearchDataProvider {
           final stockName = searchData.autoCompleteList[index].name;
           return GestureDetector(
           onTap: () {
-            // 주식 이름을 탭하면 히스토리에 추가되어야 한다.
             controller.clear();
+            searchData.addHistory(stockName);
             Navigator.push(context, MaterialPageRoute(builder: (context) => StockDetailScreen(stockName)));
           },
           child: Padding(

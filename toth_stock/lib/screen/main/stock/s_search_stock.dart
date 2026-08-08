@@ -14,7 +14,8 @@ class SearchStockScreen extends StatefulWidget {
   State<SearchStockScreen> createState() => _SearchStockScreenState();
 }
 
-class _SearchStockScreenState extends State<SearchStockScreen> with SearchDataProvider {
+class _SearchStockScreenState extends State<SearchStockScreen>
+    with SearchDataProvider {
   final controller = TextEditingController();
 
   @override
@@ -39,9 +40,14 @@ class _SearchStockScreenState extends State<SearchStockScreen> with SearchDataPr
       appBar: StockSearchAppBar(controller: controller),
       body: Obx(() {
         return searchData.autoCompleteList.isEmpty
-            ? ListView(
-                children: [SearchStockHistoryList(), PopularSearchStockList()],
-              )
+            ? searchData.searchHistoryList.isEmpty
+                  ? PopularSearchStockList()
+                  : ListView(
+                      children: [
+                        SearchStockHistoryList(),
+                        PopularSearchStockList(),
+                      ],
+                    )
             : SearchAutoCompleteList(controller: controller);
       }),
     );
