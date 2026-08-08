@@ -3,7 +3,8 @@ import 'package:toth_stock/data/search_stock_data.dart';
 import 'package:toth_stock/screen/main/stock/s_stock_detail.dart';
 
 class SearchAutoCompleteList extends StatelessWidget with SearchDataProvider {
-  SearchAutoCompleteList({super.key});
+  final TextEditingController controller;
+  SearchAutoCompleteList({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,7 @@ class SearchAutoCompleteList extends StatelessWidget with SearchDataProvider {
           return GestureDetector(
           onTap: () {
             // 주식 이름을 탭하면 히스토리에 추가되어야 한다.
+            controller.clear();
             Navigator.push(context, MaterialPageRoute(builder: (context) => StockDetailScreen(stockName)));
           },
           child: Padding(

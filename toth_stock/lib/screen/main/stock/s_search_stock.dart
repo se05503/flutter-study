@@ -42,7 +42,7 @@ class _SearchStockScreenState extends State<SearchStockScreen> with SearchDataPr
             ? ListView(
                 children: [SearchStockHistoryList(), PopularSearchStockList()],
               )
-            : SearchAutoCompleteList();
+            : SearchAutoCompleteList(controller: controller);
       }),
     );
   }
