@@ -39,16 +39,16 @@ class _SearchStockScreenState extends State<SearchStockScreen>
       backgroundColor: AbstractThemeColors.roundedLayoutBackground,
       appBar: StockSearchAppBar(controller: controller),
       body: Obx(() {
-        return searchData.autoCompleteList.isEmpty
-            ? searchData.searchHistoryList.isEmpty
-                  ? PopularSearchStockList()
-                  : ListView(
-                      children: [
-                        SearchStockHistoryList(),
-                        PopularSearchStockList(),
-                      ],
-                    )
-            : SearchAutoCompleteList(controller: controller);
+        if (searchData.autoCompleteList.isNotEmpty) {
+          return SearchAutoCompleteList(controller: controller);
+        }
+        return ListView(
+          children: [
+            if (searchData.searchHistoryList.isNotEmpty)
+              SearchStockHistoryList(),
+            PopularSearchStockList(),
+          ],
+        );
       }),
     );
   }
