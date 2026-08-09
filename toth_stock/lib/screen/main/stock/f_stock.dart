@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toth_stock/screen/main/stock/s_setting.dart';
 import '../../../common/color/colors.dart';
 import 'f_my_stock.dart';
 import 's_search_stock.dart';
@@ -41,10 +42,15 @@ class _StockFragmentState extends State<StockFragment>
               height: 30,
             ),
             SizedBox(width: 10),
-            Image.asset(
-              "assets/image/ic_stock_settings.png",
-              width: 30,
-              height: 30,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SettingScreen()));
+              },
+              child: Image.asset(
+                "assets/image/ic_stock_settings.png",
+                width: 30,
+                height: 30,
+              ),
             ),
             SizedBox(width: 10),
           ],
