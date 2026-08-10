@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:toth_stock/common/color/colors.dart';
 import 'package:toth_stock/data/setting_controller.dart';
 import 'package:toth_stock/screen/widget/w_setting_switch.dart';
+import '../../widget/w_setting_slider.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -26,12 +27,22 @@ class _SettingScreenState extends State<SettingScreen> {
       ),
       body: ListView(
         children: [
-          Obx(() => SettingSwitch(
-            value: settingData.isPushNotificationOn.value,
-            onChanged: (value) {
-              settingData.togglePushNotification(value);
-            },
-          ),)
+          Obx(
+            () => SettingSwitch(
+              value: settingData.isPushNotificationOn.value,
+              onChanged: (value) {
+                settingData.togglePushNotification(value);
+              },
+            ),
+          ),
+          Obx(
+            () => SettingSlider(
+              value: settingData.screenBrightness.value,
+              onChanged: (value) {
+                settingData.slideScreenBrightness(value);
+              },
+            ),
+          ),
         ],
       ),
     );
