@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get/get.dart';
 import 'package:timeago/timeago.dart';
+import 'package:toth_stock/data/setting_controller.dart';
 import 'package:toth_stock/screen/main/s_main_screen.dart';
 
 void main() {
@@ -9,6 +11,7 @@ void main() {
   // 네이티브 스플래시가 자동으로 사라지지 않게 고정
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   setLocaleMessages('ko', KoMessages());
+  Get.put(SettingController());
   runApp(const MyApp());
 }
 
