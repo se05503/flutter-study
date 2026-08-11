@@ -9,8 +9,8 @@ class SettingSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
+    return SizedBox(
+      height: 60,
       child: Row(
         children: [
           Text("푸시 설정", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),

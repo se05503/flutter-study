@@ -8,13 +8,13 @@ class SettingSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
+    return SizedBox(
+      height: 60,
       child: Row(
         children: [
           Text("밝기 조절", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),),
           Expanded(child: Spacer()),
-          Slider(value: value, onChanged: onChanged)
+          Slider(value: value, onChanged: onChanged, padding: EdgeInsets.symmetric(horizontal: 12))
         ],
       ),
     );
