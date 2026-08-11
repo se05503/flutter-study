@@ -7,10 +7,12 @@ class SettingController extends GetxController {
   static const String _prefPushNotificationKey = "isPushNotificationSwitchOn";
   static const String _prefScreenBrightnessKey = "screenBrightness";
   static const String _prefDateTimeKey = "dateTime";
+  static const String _prefNumberKey = "number";
 
   final RxBool isPushNotificationOn = false.obs;
   final RxDouble screenBrightness = 0.5.obs;
   final Rxn<DateTime> dateTime = Rxn<DateTime>();
+  final RxnInt selectedNumber = RxnInt();
 
   @override
   void onInit() {
@@ -33,6 +35,7 @@ class SettingController extends GetxController {
     }
     final String? dateStr = prefs.getString(_prefDateTimeKey);
     dateTime.value = dateStr != null ? DateTime.parse(dateStr) : null;
+    selectedNumber.value = prefs.getInt(_prefNumberKey);
   }
 
   Future<void> togglePushNotification(bool value) async {
@@ -56,5 +59,11 @@ class SettingController extends GetxController {
     this.dateTime.value = dateTime;
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_prefDateTimeKey, dateTime.toIso8601String());
+  }
+
+  Future<void> updateNumber(int number) async {
+    selectedNumber.value = number;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_prefNumberKey, number);
   }
 }

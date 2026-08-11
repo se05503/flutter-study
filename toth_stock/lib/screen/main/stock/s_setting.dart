@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:toth_stock/common/color/colors.dart';
 import 'package:toth_stock/data/setting_controller.dart';
 import 'package:toth_stock/screen/widget/w_setting_datepicker.dart';
+import 'package:toth_stock/screen/widget/w_setting_number_picker.dart';
 import 'package:toth_stock/screen/widget/w_setting_switch.dart';
 import '../../widget/w_setting_slider.dart';
 
@@ -45,9 +46,22 @@ class _SettingScreenState extends State<SettingScreen> {
               },
             ),
           ),
-          Obx(() => SettingDatePicker(value: settingData.dateTime.value, onChanged: (dateTime) {
-            settingData.updateDateTime(dateTime);
-          }))
+          Obx(
+            () => SettingDatePicker(
+              value: settingData.dateTime.value,
+              onChanged: (dateTime) {
+                settingData.updateDateTime(dateTime);
+              },
+            ),
+          ),
+          Obx(
+            () => SettingNumberPicker(
+              value: settingData.selectedNumber.value,
+              onChanged: (number) {
+                settingData.updateNumber(number);
+              },
+            ),
+          ),
         ],
       ),
     );
