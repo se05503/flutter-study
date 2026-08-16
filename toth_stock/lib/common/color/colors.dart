@@ -7,7 +7,7 @@ class AbstractThemeColors {
 
   static Color get veryBrightGrey => AppColors.brightGrey;
 
-  static Color get drawerBg => const Color.fromARGB(255, 255, 255, 255);
+  static Color get drawerBg => const Color.fromARGB(255, 35, 35, 39);
 
   static Color get scrollableItem => const Color.fromARGB(255, 57, 57, 57);
 
