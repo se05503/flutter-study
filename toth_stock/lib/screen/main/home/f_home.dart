@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
 import 'package:toth_stock/data/bank.dart';
 import 'package:toth_stock/screen/widget/w_app_bar.dart';
 import 'package:toth_stock/screen/widget/w_big_button.dart';
 import 'package:toth_stock/screen/widget/w_rounded_container.dart';
 
+import '../../../data/appbar_controller.dart';
 import '../../widget/w_bank_account.dart';
 import '../s_main_screen.dart';
 
@@ -16,6 +18,8 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomeFragmentState extends State<HomeFragment> {
+  final controller = Get.put<AppBarController>(AppBarController());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -56,9 +60,19 @@ class _HomeFragmentState extends State<HomeFragment> {
                     ),
                   ],
                 ).animate().slideY(duration: 1500.ms).fadeIn(),
-              )
+              ),
             ),
             TossAppBar(),
+            Obx(
+              () => Center(
+                child: AnimatedContainer(
+                  duration: 1500.ms,
+                  curve: Curves.fastEaseInToSlowEaseOut,
+                  height: controller.tappingCount.value == 3 ? 600 : 0,
+                  child: Image.asset("assets/image/ghost.png"),
+                ),
+              ),
+            ),
           ],
         ),
       ),
