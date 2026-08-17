@@ -29,30 +29,57 @@ class _TossAppBarState extends State<TossAppBar> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
             children: [
-              Image.asset(
-                "assets/image/ic_appbar_toss.png",
-                height: 36,
-                color: Colors.grey,
-                colorBlendMode: BlendMode.srcIn,
+              AnimatedCrossFade(
+                firstChild: SizedBox(
+                  width: 100,
+                  height: 30,
+                  child: Image.asset(
+                    "assets/image/toss_logo.png",
+                    color: Colors.white,
+                    colorBlendMode: BlendMode.srcIn,
+                  ),
+                ),
+                secondChild: SizedBox(
+                  width: 100,
+                  height: 30,
+                  child: Image.asset(
+                    "assets/image/toss_bank_logo.png",
+                    color: Colors.white,
+                    colorBlendMode: BlendMode.srcIn,
+                  ),
+                ),
+                crossFadeState: controller.tappingCount.value != 3 ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                duration: 1500.ms,
               ),
               Expanded(child: Container()),
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    controller.tappingCount < 3 ? controller.increment() : controller.reset();
+                    controller.tappingCount < 3
+                        ? controller.increment()
+                        : controller.reset();
                   });
                 },
-                child: SvgPicture.asset(
-                      'assets/image/ic_ghost.svg',
-                      width: 24,
-                      height: 24,
-                      colorFilter: const ColorFilter.mode(
-                        Colors.grey,
-                        BlendMode.srcIn,
-                      ),
-                    )
-                    .animate(onPlay: (controller) => controller.repeat(reverse: true))
-                    .slideX(begin: 0, end: 0.3, duration: 2000.ms, curve: Curves.easeInOut),
+                child:
+                    SvgPicture.asset(
+                          'assets/image/ic_ghost.svg',
+                          width: 24,
+                          height: 24,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.grey,
+                            BlendMode.srcIn,
+                          ),
+                        )
+                        .animate(
+                          onPlay: (controller) =>
+                              controller.repeat(reverse: true),
+                        )
+                        .slideX(
+                          begin: 0,
+                          end: 0.3,
+                          duration: 2000.ms,
+                          curve: Curves.easeInOut,
+                        ),
               ),
               SizedBox(width: 12),
               SvgPicture.asset(
