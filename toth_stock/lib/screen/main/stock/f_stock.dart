@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:toth_stock/screen/main/stock/s_setting.dart';
 import '../../../common/color/colors.dart';
 import 'f_my_stock.dart';
@@ -18,38 +18,47 @@ class _StockFragmentState extends State<StockFragment>
   late final tabController = TabController(length: 2, vsync: this);
   int currentIndex = 0;
 
-  final scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   double scrollPosition = 0;
-  final scrollThreshold = 60.0;
-  final animationDuration = 10.ms;
+  double scrollThreshold = 20;
+  int animationDuration = 10;
 
   double getValue(double initial, double target) {
-    if(scrollPosition > scrollThreshold) return target;
+    if (scrollPosition > scrollThreshold) return target;
     double ratio = scrollPosition / scrollThreshold;
     return initial + (target - initial) * ratio;
   }
 
   @override
   void initState() {
-    scrollController.addListener(() {
+    super.initState();
+    _scrollController.addListener(() {
       setState(() {
-        scrollPosition = scrollController.position.pixels;
+        scrollPosition = _scrollController.position.pixels;
       });
     });
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      controller: scrollController,
+      controller: _scrollController,
       slivers: [
         SliverAppBar(
           pinned: true,
-          title: title,
-          expandedHeight: 120,
-          toolbarHeight: 60,
           backgroundColor: AbstractThemeColors.roundedLayoutBackground,
+          expandedHeight: 80,
+          flexibleSpace: AnimatedContainer(
+            duration: Duration(milliseconds: animationDuration),
+            padding: EdgeInsets.only(top: getValue(80, 50)),
+            child: title,
+          ),
           actions: [
             GestureDetector(
               onTap: () {
@@ -58,19 +67,24 @@ class _StockFragmentState extends State<StockFragment>
                   MaterialPageRoute(builder: (context) => SearchStockScreen()),
                 );
               },
-              child: Image.asset(
-                "assets/image/ic_stock_search.png",
-                width: 30,
-                height: 30,
+              child: SvgPicture.asset(
+                'assets/image/ic_search.svg',
+                width: 24,
+                height: 24,
+                colorFilter: const ColorFilter.mode(
+                  Colors.grey,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
-            SizedBox(width: 10),
-            Image.asset(
-              "assets/image/ic_stock_calendar.png",
-              width: 30,
-              height: 30,
+            SizedBox(width: 16),
+            SvgPicture.asset(
+              'assets/image/ic_calendar.svg',
+              width: 24,
+              height: 24,
+              colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 16),
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -78,10 +92,14 @@ class _StockFragmentState extends State<StockFragment>
                   MaterialPageRoute(builder: (context) => SettingScreen()),
                 );
               },
-              child: Image.asset(
-                "assets/image/ic_stock_settings.png",
-                width: 30,
-                height: 30,
+              child: SvgPicture.asset(
+                'assets/image/ic_setting.svg',
+                width: 24,
+                height: 24,
+                colorFilter: const ColorFilter.mode(
+                  Colors.grey,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
             SizedBox(width: 10),
@@ -102,43 +120,38 @@ class _StockFragmentState extends State<StockFragment>
     );
   }
 
-  Widget get title => AnimatedContainer(
-    duration: animationDuration,
-    padding: EdgeInsets.only(top: getValue(80, 0)),
-    child: Container(
-      color: AbstractThemeColors.roundedLayoutBackground,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            "토스증권",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
-          ),
-          SizedBox(width: 10),
-          Text(
-            "S&P 500",
-            style: TextStyle(
-              color: AbstractThemeColors.lessImportantColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
-          ),
-          SizedBox(width: 10),
-          Text(
-            "3,919.29",
-            style: TextStyle(
-              color: AbstractThemeColors.plus,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
-          ),
-        ],
+  Widget get title => Row(
+    crossAxisAlignment: CrossAxisAlignment.end,
+    children: [
+      SizedBox(width: 16),
+      AnimatedDefaultTextStyle(
+        duration: Duration(milliseconds: animationDuration),
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: getValue(18, 24),
+        ),
+        child: Text("토스증권"),
       ),
-    ),
+      SizedBox(width: 10),
+      Text(
+        "S&P 500",
+        style: TextStyle(
+          color: AbstractThemeColors.lessImportantColor,
+          fontWeight: FontWeight.bold,
+          fontSize: 13,
+        ),
+      ),
+      SizedBox(width: 10),
+      Text(
+        "3,919.29",
+        style: TextStyle(
+          color: AbstractThemeColors.plus,
+          fontWeight: FontWeight.bold,
+          fontSize: 13,
+        ),
+      ),
+    ],
   );
 
   Widget get tabBar => Container(
