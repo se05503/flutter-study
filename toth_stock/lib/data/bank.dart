@@ -24,6 +24,16 @@ final bankAccountKakao3 = BankAccount(bankKakaoBank, 1200000);
 final bankAccountWoori1 = BankAccount(bankWoori, 900000, accountTypeName: "입출금통장");
 final bankAccountWoori2 = BankAccount(bankWoori, 950000);
 final bankAccountWoori3 = BankAccount(bankWoori, 970000);
+final bankAccountShinhan4 = BankAccount(bankShinhan, 1500000, accountTypeName: "급여통장");
+final bankAccountShinhan5 = BankAccount(bankShinhan, 2000000);
+final bankAccountKakao4 = BankAccount(bankKakaoBank, 5000000, accountTypeName: "비상금통장");
+final bankAccountKakao5 = BankAccount(bankKakaoBank, 300000, accountTypeName: "저금통");
+final bankAccountWoori4 = BankAccount(bankWoori, 1200000, accountTypeName: "주택청약종합저축");
+final bankAccountWoori5 = BankAccount(bankWoori, 450000);
+final bankAccountShinhan6 = BankAccount(bankShinhan, 700000, accountTypeName: "마이너스통장");
+final bankAccountKakao6 = BankAccount(bankKakaoBank, 880000);
+final bankAccountWoori6 = BankAccount(bankWoori, 3300000, accountTypeName: "정기예금");
+final bankAccountShinhan7 = BankAccount(bankShinhan, 100000);
 
 final bankAccounts = [
   bankAccountShinhan1,
@@ -34,5 +44,15 @@ final bankAccounts = [
   bankAccountKakao3,
   bankAccountWoori1,
   bankAccountWoori2,
-  bankAccountWoori3
+  bankAccountWoori3,
+  bankAccountShinhan4,
+  bankAccountShinhan5,
+  bankAccountKakao4,
+  bankAccountKakao5,
+  bankAccountWoori4,
+  bankAccountWoori5,
+  bankAccountShinhan6,
+  bankAccountKakao6,
+  bankAccountWoori6,
+  bankAccountShinhan7,
 ];

@@ -5,7 +5,6 @@ import 'package:toth_stock/data/bank.dart';
 import 'package:toth_stock/screen/widget/w_app_bar.dart';
 import 'package:toth_stock/screen/widget/w_big_button.dart';
 import 'package:toth_stock/screen/widget/w_rounded_container.dart';
-
 import '../../../data/appbar_controller.dart';
 import '../../widget/w_bank_account.dart';
 import '../s_main_screen.dart';
@@ -19,6 +18,26 @@ class HomeFragment extends StatefulWidget {
 
 class _HomeFragmentState extends State<HomeFragment> {
   final controller = Get.put<AppBarController>(AppBarController());
+  final _scrollController = ScrollController();
+  double scrollPosition = 0.0;
+  double scrollThreshold = 180.0;
+  bool get isTriggered => scrollPosition > scrollThreshold;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      setState(() {
+        scrollPosition = _scrollController.position.pixels;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +52,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               },
               edgeOffset: TossAppBar.appBarHeight,
               child: SingleChildScrollView(
+                controller: _scrollController,
                 padding: EdgeInsets.only(
                   top: TossAppBar.appBarHeight + 12,
                   bottom: MainScreen.bottomNavigationHeight,
@@ -62,7 +82,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 ).animate().slideY(duration: 1500.ms).fadeIn(),
               ),
             ),
-            TossAppBar(),
+            TossAppBar(isTriggered: isTriggered),
             Obx(
               () => Center(
                 child: AnimatedContainer(

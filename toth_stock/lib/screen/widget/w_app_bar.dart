@@ -8,8 +8,9 @@ import 'package:toth_stock/screen/notification/s_notification.dart';
 
 class TossAppBar extends StatefulWidget {
   static const double appBarHeight = 60;
+  final bool isTriggered;
 
-  const TossAppBar({super.key});
+  const TossAppBar({required this.isTriggered, super.key});
 
   @override
   State<TossAppBar> createState() => _TossAppBarState();
@@ -48,7 +49,9 @@ class _TossAppBarState extends State<TossAppBar> {
                     colorBlendMode: BlendMode.srcIn,
                   ),
                 ),
-                crossFadeState: controller.tappingCount.value != 3 ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                crossFadeState: controller.tappingCount.value != 3
+                    ? CrossFadeState.showFirst
+                    : CrossFadeState.showSecond,
                 duration: 1500.ms,
               ),
               Expanded(child: Container()),
@@ -60,26 +63,30 @@ class _TossAppBarState extends State<TossAppBar> {
                         : controller.reset();
                   });
                 },
-                child:
-                    SvgPicture.asset(
-                          'assets/image/ic_ghost.svg',
-                          width: 24,
-                          height: 24,
-                          colorFilter: const ColorFilter.mode(
-                            Colors.grey,
-                            BlendMode.srcIn,
+                child: TweenAnimationBuilder(
+                  tween: ColorTween(begin: Colors.red, end: widget.isTriggered ? Colors.blue : Colors.red),
+                  duration: 1000.ms,
+                  builder: (context, color, child) =>
+                      SvgPicture.asset(
+                            'assets/image/ic_ghost.svg',
+                            width: 24,
+                            height: 24,
+                            colorFilter: ColorFilter.mode(
+                              color ?? Colors.red,
+                              BlendMode.srcIn,
+                            ),
+                          )
+                          .animate(
+                            onPlay: (controller) =>
+                                controller.repeat(reverse: true),
+                          )
+                          .slideX(
+                            begin: 0,
+                            end: 0.3,
+                            duration: 2000.ms,
+                            curve: Curves.easeInOut,
                           ),
-                        )
-                        .animate(
-                          onPlay: (controller) =>
-                              controller.repeat(reverse: true),
-                        )
-                        .slideX(
-                          begin: 0,
-                          end: 0.3,
-                          duration: 2000.ms,
-                          curve: Curves.easeInOut,
-                        ),
+                ),
               ),
               SizedBox(width: 12),
               SvgPicture.asset(
