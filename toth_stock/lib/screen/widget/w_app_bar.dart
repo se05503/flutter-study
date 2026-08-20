@@ -64,17 +64,23 @@ class _TossAppBarState extends State<TossAppBar> {
                   });
                 },
                 child: TweenAnimationBuilder(
-                  tween: ColorTween(begin: Colors.red, end: widget.isTriggered ? Colors.blue : Colors.red),
+                  tween: ColorTween(
+                    begin: Colors.red,
+                    end: widget.isTriggered ? Colors.blue : Colors.red,
+                  ),
                   duration: 1000.ms,
-                  builder: (context, color, child) =>
+                  builder: (context, color, child) => ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      color ?? Colors.red,
+                      BlendMode.srcIn,
+                    ),
+                    child: child,
+                  ),
+                  child:
                       SvgPicture.asset(
                             'assets/image/ic_ghost.svg',
                             width: 24,
                             height: 24,
-                            colorFilter: ColorFilter.mode(
-                              color ?? Colors.red,
-                              BlendMode.srcIn,
-                            ),
                           )
                           .animate(
                             onPlay: (controller) =>
