@@ -47,6 +47,7 @@ dependencies:
   flutter_animate: ^4.5.2
   animations: ^2.2.0
   lottie: ^3.3.3
+  rive: ^0.14.11
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
   assets:
      - assets/image/
      - assets/json/
+     - assets/rive/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
